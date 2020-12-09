@@ -1,21 +1,29 @@
+import { AppLoading } from 'expo';
+import { Camera } from 'expo-camera';
+import { useFonts } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import { Root } from 'native-base';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Navigations from "./src/Navigators/Navigations";
+
 
 export default function App() {
+
+  let [fontsloaded] = useFonts({
+    "Avenir-Medium": require("./Fonts/Avenir-Medium.ttf"),
+    "Avenir-Roman": require("./Fonts/Avenir-Roman.otf"),
+    "Avenir-Heavy": require("./Fonts/AEH.ttf"),
+    Roboto_medium: require("./Fonts/Roboto-Medium.ttf"),
+    "Avenir-Black": require("./Fonts/Avenir-Black.otf"),
+  });
+  if (!fontsloaded) {
+    return <AppLoading />;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <Root>
+        <Navigations />
+      </Root>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
